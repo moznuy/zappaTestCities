@@ -21,7 +21,3 @@ def hello():
     return render_template('index.html', city=city_row[0], province=city_row[2], country=city_row[1])
 
 
-@app.route('/favicon.svg')
-def root():
-    return app.send_static_file('favicon.svg')
-

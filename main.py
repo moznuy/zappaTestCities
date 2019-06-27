@@ -1,8 +1,9 @@
-from flask import Flask
-from time import sleep
-import random
-import logging
 import csv
+import logging
+import random
+
+from flask import Flask, render_template
+
 app = Flask(__name__)
 
 logger = logging.getLogger()
@@ -14,9 +15,8 @@ with open('world_cities.csv', newline='') as csvfile:
     cities = [row for row in spamreader]
 
 
-print(len(cities))
-
 @app.route("/")
 def hello():
-    city = random.choice(cities)
-    return f"Hello World!<br>And here is your random city: {city[0]} from {city[2]} in {city[1]}"
+    city_row = random.choice(cities)
+    return render_template('index.html', city=city_row[0], province=city_row[2], country=city_row[1])
+
